@@ -7,6 +7,7 @@ const descriptions = {
   "Scarcity": "Tries to increase the value of something by making it appear to be limited in availability.",
   "Obstruction": "Tries to make an action more difficult so that a user is less likely to do that action.",
   "Forced Action": "Forces a user to complete extra, unrelated tasks to do something that should be simple.",
+  "Google Ads": "Ads that are placed by Google.",
 };
 
 function scrape() {
@@ -47,6 +48,9 @@ function scrape() {
         }
 
         if (json.result[i] !== "Not Dark") {
+          if (elements[i].src && elements[i].src.includes("googlesyndication")) {
+            json.result[i] = "Google Ads";
+          }
           highlight(elements[element_index], json.result[i]);
           dp_count++;
         }
